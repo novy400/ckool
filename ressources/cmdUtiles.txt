@@ -1,0 +1,10 @@
+CPYTOSTMF FROMMBR('/qsys.lib/NOVY4001.lib/qddssrc.file/xxx.mbr') 
+TOSTMF('/home/NOVY400/mesProjets/ckool/src/xxx.pf') 
+STMFOPT(*REPLACE) STMFCCSID(1208)
+
+RUNSQLSTM SRCSTMF('/home/NOVY400/mesProjets/ckool/sql/xxx.sql') COMMIT(*NONE)   
+
+scp -r * dev:/home/NOVY400/mesProjets/ckool/ 
+cd /home/NOVY400/mesProjets/ckool 
+
+

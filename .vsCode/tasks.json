@@ -1,0 +1,110 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "ILE: Compile current file",
+            "command": "ssh -t ${config:ssh_config} 'PATH=${config:server_path}:$PATH;cd ${config:server_project_dir};make ${fileBasenameNoExtension}.${input:buildType}> ${fileBasenameNoExtension}.cmp'",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "rpgle",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):.{20}(\\d+)\\s+(.*)",
+                    "file": 1,
+                    "line": 2,
+                    "message": 3
+                }
+            }
+        },
+        {
+            "label": "ILE: Send all",
+            "command": "scp -r ${workspaceFolder}/* ${config:ssh_config}:${config:server_project_dir}",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "rpgle",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):.{20}(\\d+)\\s+(.*)",
+                    "file": 1,
+                    "line": 2,
+                    "message": 3
+                }
+            }
+        },
+        {
+            "label": "ILE: Send current file",
+            "command": "scp -r ${file} ${config:ssh_config}:${config:server_project_dir}${relativeFile}",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "rpgle",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):.{20}(\\d+)\\s+(.*)",
+                    "file": 1,
+                    "line": 2,
+                    "message": 3
+                }
+            }
+        },
+        {
+            "label": "ILE: Send and Compile current file",
+            "command": "scp -r ${file} ${config:ssh_config}:${config:server_project_dir}${relativeFile};ssh -t ${config:ssh_config} 'PATH=${config:server_path}:$PATH;cd ${config:server_project_dir};make ${fileBasenameNoExtension}.${input:buildType}> ${fileBasenameNoExtension}.cmp'",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "rpgle",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):.{20}(\\d+)\\s+(.*)",
+                    "file": 1,
+                    "line": 2,
+                    "message": 3
+                }
+            }
+        }
+    ],
+    "inputs": [
+      {
+        "type": "pickString",
+        "id": "buildType",
+        "description": "What type of build do you want to create?",
+        "options": [
+          "tgm",
+          "pgm",
+          "dspf",
+          "srvpgm",
+          "cmd"
+        ],
+        "default": "${fileExtname}"
+      }
+    ]
+}
