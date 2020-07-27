@@ -16,15 +16,18 @@ ctl-opt nomain
 //                                                                    
 dcl-proc CKOOL_writeJobLog export;
   dcl-pi *N;
-       pText varchar(65535) Const;
+       pText like(CKOOL_longText) Const;
   end-pi;
   dcl-c THISPROC 'CKOOL_writeJobLog'; 
   dcl-s lErrorCode int(10);
+  dcl-s lText like(CKOOL_longText);
   monitor;
   //initialisation
   // traitement
   clear lErrorCode;
-  lErrorCode = Qp0zLprintf(pText);
+  clear lText;
+  lText =%trim(pText) + TOOLS_LINEFEED;
+  lErrorCode = Qp0zLprintf(lText);
   // finalisation 
   return;
   on-error;
