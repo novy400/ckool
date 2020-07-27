@@ -37,6 +37,7 @@ ARCHIAPI.bnddir : CKOOL.entry
 
 %.pgm:
 	$(eval modules := $(patsubst %,$(WRK_LIB)/%,$(basename $(filter %.rpgle %.sqlrpgle,$(notdir $^)))))
+	liblist -af $(LIBLIST);\
 	system "CRTPGM PGM($(BIN_LIB)/$*) MODULE($(modules))"
 	@touch $@
 	system "DLTOBJ OBJ($(WRK_LIB)/*ALL) OBJTYPE(*MODULE)"
