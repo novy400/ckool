@@ -25,7 +25,7 @@
         //------------------------------------------------------------- *
         dcl-proc  main;
         dcl-pi *N;
-          pMsg like(CKOOL_longText) const;
+          pMsg char(200) const;
         end-pi;
           dcl-s ErrorHappened ind ;
           CKOOL_writeJobLog('Mon message' + %trim(pMsg) +'.');
