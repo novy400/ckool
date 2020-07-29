@@ -30,7 +30,7 @@
           dcl-s ErrorHappened ind ;
           CKOOL_writeJobLog('Mon message' + %trim(pMsg) +'.');
         on-exit ErrorHappened;
-          dsply ('ckool  tout semble bien se passer !');
+          dsply ('cela ne marche pas  !');
           if ErrorHappened;
           else;  
           dsply ('c fini !');
