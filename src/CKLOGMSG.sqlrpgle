@@ -30,7 +30,7 @@
           dcl-s ErrorHappened ind ;
           CKOOL_writeJobLog('Mon message' + %trim(pMsg) +'.');
         on-exit ErrorHappened;
-          dsply ('cela ne marche pas vec les accents éà@ù !');
+          dsply ('cela marche avec les accents éà@ù !');
           if ErrorHappened;
           else;  
           dsply ('c fini !');
