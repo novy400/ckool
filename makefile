@@ -11,6 +11,9 @@ BND_LIB=$(BIN_LIB)
 INC_LIB= '/home/NOVY400/include/'
 LIBLIST=$(BIN_LIB)
 CCSID=297 
+CURRENT_USER=NOVY400
+JOBD_ADMIN=NOVY400
+
 
 
 # The shell we use
@@ -66,6 +69,7 @@ ARCHIAPI.bnddir : CKOOL.entry
 %.clle: src/%.clle
 	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
 	system "CPYFRMSTMF FROMSTMF('$<') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QCLSRC.file/$*.mbr') MBROPT(*REPLACE) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
+	liblist -af $(LIBLIST);\
 	system "CRTBNDCL PGM($(BIN_LIB)/$*) SRCFILE($(SRC_LIB)/QCLSRC) SRCMBR(*PGM)"
 	@touch $@
 
@@ -88,6 +92,7 @@ ARCHIAPI.bnddir : CKOOL.entry
 %.dspf: src/%.dspf
 	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
 	system "CPYFRMSTMF FROMSTMF('$<') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QDDSSRC.file/$*.mbr') MBROPT(*replace) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
+	liblist -af $(LIBLIST);\
 	system "CRTDSPF FILE($(BIN_LIB)/$*) SRCFILE($(SRC_LIB)/QDDSSRC) SRCMBR($*) REPLACE(*YES)"
 	@touch $@
 
@@ -95,12 +100,15 @@ ARCHIAPI.bnddir : CKOOL.entry
 	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
 	system "CPYFRMSTMF FROMSTMF('./src/$*.pf') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QDDSSRC.file/$*.mbr') MBROPT(*replace) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
 	system "CHGPF FILE($(DB_LIB)/$*) SRCFILE($(SRC_LIB)/QDDSSRC)"
+	system "CHGPDMDFT USER($(CURRENT_USER)) OBJLIB(*SRCLIB) RPLOBJ(*YES) CRTBCH(*YES) RUNBCH(*YES) JOBD($(JOBD_ADMIN))"       
+	SYSTEM "FNDSTRPDM STRING($*) FILE($(SRC_LIB)/QRPGLESRC) MBR(*ALL) OPTION(*CMPL) PRTMBRLIST(*YES)"             
+
 	@touch $@
 
 %.sql: sql/%.sql
 	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
 	liblist -c $(LIBLIST);\
-	system "RUNSQLSTM SRCSTMF('$<') COMMIT(*NONE) NAMING(*SQL)"
+	system "RUNSQLSTM SRCSTMF('$<') COMMIT(*NONE) NAMING(*SYS)"
 	@touch $@
 
 %.bnddir: 
