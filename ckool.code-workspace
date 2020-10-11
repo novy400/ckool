@@ -2,10 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"name": "SSH FS - pub400_ckool",
-			"uri": "ssh://pub400_ckool/"
 		}
 	],
 	"settings": {}
