@@ -30,6 +30,9 @@ CKOOL.tgm : CKOOL.srvpgm ARCHIAPI.bnddir
 CKLOGMSG.pgm : CKLOGMSG.sqlrpgle
 CKLOGMSG.tgm : CKOOL.srvpgm CKLOGMSG.pgm
 CKLOGMSG.cmd : CKLOGMSG.tgm
+CKLONGMSG.pgm : CKLONGMSG.sqlrpgle
+CKLONGMSG.tgm : CKOOL.srvpgm CKLONGMSG.pgm
+CKLONGMSG.cmd : CKLONGMSG.tgm
 ARCHIAPI.bnddir : CKOOL.entry
 
 
