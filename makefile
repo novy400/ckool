@@ -47,42 +47,44 @@ ARCHIAPI.bnddir : CKOOL.entry
 	@touch $@
 	system "DLTOBJ OBJ($(WRK_LIB)/*ALL) OBJTYPE(*MODULE)"
 
-%.inc: include/%.rpgleinc
+%.inc: include/%.rpgle
 	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
 	cp  '$<'  $(INC_LIB)
 	@touch $@
 
 %.rpgle: src/%.rpgle
 	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
-	system "CPYFRMSTMF FROMSTMF('$<') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QRPGLESRC.file/$*.mbr') MBROPT(*REPLACE) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
+	#system "CPYFRMSTMF FROMSTMF('$<') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QRPGLESRC.file/$*.mbr') MBROPT(*REPLACE) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
 	liblist -af $(LIBLIST);\
 	system "CRTRPGMOD MODULE($(WRK_LIB)/$*) SRCSTMF('$<') DBGVIEW($(DBGVIEW)) TGTCCSID($(CCSID))"
 	@touch $@
 
 %.sqlrpgle: src/%.sqlrpgle
 	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
-	system "CPYFRMSTMF FROMSTMF('$<') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QRPGLESRC.file/$*.mbr') MBROPT(*REPLACE) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
+	#system "CPYFRMSTMF FROMSTMF('$<') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QRPGLESRC.file/$*.mbr') MBROPT(*REPLACE) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
 	liblist -af $(LIBLIST);\
 	system "CRTSQLRPGI OBJ($(WRK_LIB)/$*) SRCSTMF('$<') COMMIT(*NONE) OBJTYPE(*MODULE) RPGPPOPT(*LVL2) COMPILEOPT('TGTCCSID($(CCSID))') DBGVIEW($(DBGVIEWSQL))"
 	@touch $@
 
 %.clle: src/%.clle
 	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
-	system "CPYFRMSTMF FROMSTMF('$<') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QCLSRC.file/$*.mbr') MBROPT(*REPLACE) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
+	#system "CPYFRMSTMF FROMSTMF('$<') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QCLSRC.file/$*.mbr') MBROPT(*REPLACE) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
 	liblist -af $(LIBLIST);\
-	system "CRTBNDCL PGM($(BIN_LIB)/$*) SRCFILE($(SRC_LIB)/QCLSRC) SRCMBR(*PGM)"
+	#system "CRTBNDCL PGM($(BIN_LIB)/$*) SRCFILE($(SRC_LIB)/QCLSRC) SRCMBR(*PGM)"
+	system "CRTBNDCL PGM($(BIN_LIB)/$*) SRCSTMF('$<') SRCMBR(*PGM)"
 	@touch $@
 
 %.cmd: src/%.cmd
 	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
-	system "CPYFRMSTMF FROMSTMF('$<') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QCMDSRC.file/$*.mbr') MBROPT(*REPLACE) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
-	system "CRTCMD CMD($(BIN_LIB)/$*) PGM($(BIN_LIB)/$*) SRCFILE($(SRC_LIB)/QCMDSRC)"
+	#system "CPYFRMSTMF FROMSTMF('$<') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QCMDSRC.file/$*.mbr') MBROPT(*REPLACE) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
+	#system "CRTCMD CMD($(BIN_LIB)/$*) PGM($(BIN_LIB)/$*) SRCFILE($(SRC_LIB)/QCMDSRC)"
+	system "CRTCMD CMD($(BIN_LIB)/$*) PGM($(BIN_LIB)/$*) SRCSTMF('$<')"
 	system "CHGCMD CMD($(BIN_LIB)/$*) PGM(*LIBL/$*)"
 	@touch $@
 
 %.srvpgm: 
 	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
-	system "CPYFRMSTMF FROMSTMF('./src/$*.binder') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QSRVSRC.file/$*.mbr') MBROPT(*replace) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
+	system "CPYFRMSTMF FROMSTMF('./src/$*.bnd') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QSRVSRC.file/$*.mbr') MBROPT(*replace) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
 	system "CRTSRVPGM SRVPGM($(BIN_LIB)/$*) MODULE($(patsubst %,$(WRK_LIB)/%,$(basename $^))) OPTION(*DUPPROC) SRCFILE($(SRC_LIB)/QSRVSRC)"
 
 	@touch $@

@@ -20,7 +20,7 @@
         Ctl-Opt BndDir('QC2LE':'ARCHIAPI')
                 Option(*nodebugio:*srcstmt:*nounref)
                 main(main);
-        /include '/home/NOVY400/include/CKOOL.rpgleinc'
+        /include '/home/NOVY400/include/CKOOL.rpgle'
 
         //------------------------------------------------------------- *
         dcl-proc  main;

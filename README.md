@@ -15,3 +15,11 @@ Le programme de service CKOOL regroupe des procédures qui peuvent faciliter vos
 utilisable aussi via la commande
 
 ```CKLOGMSG MSG('Write this data')```
+
+### CKOOL_displayLongMessage : pour afficher un long message à l'écran.
+
+```CKOOL_displayLongMessage( 'Bonjour ceci est un long message ' + %char(toto)); ```
+
+utilisable aussi via la commande
+
+```CKLONGMSG MSG('Write this data')```
