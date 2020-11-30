@@ -1,18 +1,3 @@
-# PROJET= CKOOL
-# DBGVIEW=*ALL
-# DBGVIEWSQL=*SOURCE
-# #BIN_LIB=$(PROJET)
-# BIN_LIB=NOVY4001
-# #WRK_LIB=$(PROJET)WRK
-# WRK_LIB=NOVY4002
-# SRC_LIB=NOVY4001
-# #DB_LIB=
-# BND_LIB=$(BIN_LIB)
-# INC_LIB= '/home/NOVY400/include/'
-# LIBLIST=$(BIN_LIB)
-# CCSID=297 
-# CURRENT_USER=NOVY400
-# JOBD_ADMIN=NOVY400
 include makefile_config
 
 
@@ -21,19 +6,7 @@ SHELL=/QOpenSys/usr/bin/qsh
 
 
 # Makefile for migrate project
-
-all: crtlib CKOOL.tgm CKLOGMSG.cmd CKLONGMSG.cmd
-crtlib:  $(WRK_LIB).lib $(BIN_LIB).lib 
-
-CKOOL.srvpgm : CKOOL.inc CKOOL.rpgle
-CKOOL.tgm : CKOOL.srvpgm ARCHIAPI.bnddir 
-CKLOGMSG.pgm : CKLOGMSG.sqlrpgle
-CKLOGMSG.tgm : CKOOL.srvpgm CKLOGMSG.pgm
-CKLOGMSG.cmd : CKLOGMSG.tgm
-CKLONGMSG.pgm : CKLONGMSG.sqlrpgle
-CKLONGMSG.tgm : CKOOL.srvpgm CKLONGMSG.pgm
-CKLONGMSG.cmd : CKLONGMSG.tgm
-ARCHIAPI.bnddir : CKOOL.entry
+include makefile_components
 
 
 
