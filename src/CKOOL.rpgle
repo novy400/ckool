@@ -1,8 +1,9 @@
 **free
 ctl-opt nomain
         option(*nodebugio:*srcstmt:*nounref)
-        bnddir('QC2LE');
-/include '../include/CKOOL.rpgle'
+        bnddir('QC2LE':'ARCHIAPI');
+/include '../include/CKOOL_h.rpgle'
+/include '../include/message_h.rpgle'
 
  
 //                                                                    

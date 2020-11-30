@@ -9,8 +9,6 @@ SHELL=/QOpenSys/usr/bin/qsh
 include makefile_components
 
 
-
-
 %.lib:
 	-system -q "CRTLIB $*"
 	@touch $@
@@ -102,7 +100,11 @@ include makefile_components
 	@touch $@
 
 clean:
-	rm -f *.lib *.pgm *.rpgle *.sqlrpgle *.cmd *.srvpgm *.dspf
+	rm -f *.pgm *.rpgle *.sqlrpgle *.cmd *.srvpgm *.dspf *.bnddir *.entry *.inc *.cmp
+	-system "CLRLIB $(BIN_LIB)"
+	-system "CLRLIB $(WRK_LIB)"
+
+
 	
 release:
 	@echo " -- Creating release. --"
