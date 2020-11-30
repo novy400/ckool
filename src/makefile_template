@@ -79,9 +79,9 @@ ARCHIAPI.bnddir : CKOOL.entry
 
 %.cmd: src/%.cmd
 	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
-	system "CPYFRMSTMF FROMSTMF('$<') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QCMDSRC.file/$*.mbr') MBROPT(*REPLACE) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
-	system "CRTCMD CMD($(BIN_LIB)/$*) PGM($(BIN_LIB)/$*) SRCFILE($(SRC_LIB)/QCMDSRC)"
-	# system "CRTCMD CMD($(BIN_LIB)/$*) PGM($(BIN_LIB)/$*) SRCSTMF('$<')"
+	#system "CPYFRMSTMF FROMSTMF('$<') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QCMDSRC.file/$*.mbr') MBROPT(*REPLACE) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
+	#system "CRTCMD CMD($(BIN_LIB)/$*) PGM($(BIN_LIB)/$*) SRCFILE($(SRC_LIB)/QCMDSRC)"
+	system "CRTCMD CMD($(BIN_LIB)/$*) PGM($(BIN_LIB)/$*) SRCSTMF('$<')"
 	system "CHGCMD CMD($(BIN_LIB)/$*) PGM(*LIBL/$*)"
 	@touch $@
 

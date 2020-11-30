@@ -1,5 +1,5 @@
 .vscode/*
-!.vscode/settings.json
+.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
@@ -7,3 +7,7 @@
 
 # Local History for Visual Studio Code
 .history/
+
+# config makeFile 
+makefile_config
+makefile

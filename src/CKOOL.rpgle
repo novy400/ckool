@@ -2,7 +2,7 @@
 ctl-opt nomain
         option(*nodebugio:*srcstmt:*nounref)
         bnddir('QC2LE');
-/include '/home/NOVY400/include/CKOOL.rpgle'
+/include '../include/CKOOL.rpgle'
 
  
 //                                                                    
