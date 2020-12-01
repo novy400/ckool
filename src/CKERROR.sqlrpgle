@@ -25,12 +25,19 @@
         //------------------------------------------------------------- *
         dcl-proc  main;
         dcl-pi *N;
-          pMsg char(200) const;
         end-pi;
+          dcl-s lMsg char(200);
           dcl-s ErrorHappened ind ;
-          CKOOL_displayLongMessage('Mon long message' + %trim(pMsg) +'.');
-        on-exit ErrorHappened;
-          if ErrorHappened;
-          endif;
-          return;
+              monitor;
+                CKOOL_throw('test throw');
+              on-error;
+                clear lMsg; 
+                lMsg = CKOOL_catch();
+                CKOOL_displayLongMessage('Mon message' + %trim(lMsg) +'.');
+                CKOOL_writeJobLog(lMsg);
+              endmon;
+              on-exit ErrorHappened;
+                if ErrorHappened;
+                endif;
+              return;
         end-proc;

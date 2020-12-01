@@ -1,8 +1,9 @@
 **free
 ctl-opt nomain
         option(*nodebugio:*srcstmt:*nounref)
-        bnddir('QC2LE');
-/include '/home/NOVY400/include/CKOOL.rpgle'
+        bnddir('QC2LE':'ARCHIAPI');
+/include '../include/CKOOL_h.rpgle'
+
 
  
 //                                                                    
@@ -71,5 +72,23 @@ dcl-proc CKOOL_displayLongMessage export;
   //ko =======> anomalie ................
   return;
   endmon;
+end-proc;
+dcl-proc CKOOL_throw export;
+  dcl-pi *N;
+    message like(messageInfo_t.message) const;
+  end-pi;
+
+  // The message reference key.
+  message_sendEscapeMessage(message:0);
+
+end-proc;
+dcl-proc CKOOL_catch export;
+  dcl-pi *N like(message_t.text);
+  end-pi;
+
+  dcl-ds message likeds(message_t);
+  clear message;
+  message = message_receiveMessage('*ANY' : 1 );
+   return message.text;
 end-proc;
 

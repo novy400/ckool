@@ -1,3 +1,4 @@
+
 include makefile_config
 
 
@@ -7,6 +8,8 @@ SHELL=/QOpenSys/usr/bin/qsh
 
 # Makefile for migrate project
 include makefile_components
+
+
 
 
 %.lib:
@@ -50,9 +53,9 @@ include makefile_components
 
 %.cmd: src/%.cmd
 	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
-	system "CPYFRMSTMF FROMSTMF('$<') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QCMDSRC.file/$*.mbr') MBROPT(*REPLACE) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
-	system "CRTCMD CMD($(BIN_LIB)/$*) PGM($(BIN_LIB)/$*) SRCFILE($(SRC_LIB)/QCMDSRC)"
-	# system "CRTCMD CMD($(BIN_LIB)/$*) PGM($(BIN_LIB)/$*) SRCSTMF('$<')"
+	#system "CPYFRMSTMF FROMSTMF('$<') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QCMDSRC.file/$*.mbr') MBROPT(*REPLACE) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
+	#system "CRTCMD CMD($(BIN_LIB)/$*) PGM($(BIN_LIB)/$*) SRCFILE($(SRC_LIB)/QCMDSRC)"
+	system "CRTCMD CMD($(BIN_LIB)/$*) PGM($(BIN_LIB)/$*) SRCSTMF('$<')"
 	system "CHGCMD CMD($(BIN_LIB)/$*) PGM(*LIBL/$*)"
 	@touch $@
 
@@ -61,7 +64,6 @@ include makefile_components
 	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
 	#system "CPYFRMSTMF FROMSTMF('$<') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QSRVSRC.file/$*.mbr') MBROPT(*replace) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
 	#system "CRTSRVPGM SRVPGM($(BIN_LIB)/$*) MODULE($(patsubst %,$(WRK_LIB)/%,$(basename $^))) OPTION(*DUPPROC) SRCFILE($(SRC_LIB)/QSRVSRC)"
-	liblist -af $(LIBLIST);\
 	system "CRTSRVPGM SRVPGM($(BIN_LIB)/$*) MODULE($(modules)) OPTION(*DUPPROC) SRCSTMF('$<')"
 
 	@touch $@
@@ -101,11 +103,7 @@ include makefile_components
 	@touch $@
 
 clean:
-	rm -f *.pgm *.rpgle *.sqlrpgle *.cmd *.srvpgm *.dspf *.bnddir *.entry *.inc *.cmp
-	-system "CLRLIB $(BIN_LIB)"
-	-system "CLRLIB $(WRK_LIB)"
-
-
+	rm -f *.lib *.pgm *.rpgle *.sqlrpgle *.cmd *.srvpgm *.dspf
 	
 release:
 	@echo " -- Creating release. --"

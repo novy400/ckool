@@ -23,3 +23,20 @@ utilisable aussi via la commande
 utilisable aussi via la commande
 
 ```CKLONGMSG MSG('Write this data')```
+
+### CKOOL_throw : pour lever une exception.
+
+```CKOOL_throw('test throw'); ```
+
+un exemple de le programme CKERROR utilisable aussi via la commande
+
+```CKERROR```
+
+### CKOOL_catch : pour attraper une exception.
+
+```clear lMsg;```
+```lMsg = CKOOL_catch();```
+
+un exemple de le programme CKERROR utilisable aussi via la commande
+
+```CKERROR```

@@ -1,0 +1,19 @@
+
+# Makefile for migrate project
+
+all: crtlib CKOOL.tgm CKLOGMSG.cmd CKLONGMSG.cmd CKERROR.cmd
+crtlib:  $(WRK_LIB).lib $(BIN_LIB).lib 
+
+
+CKOOL.srvpgm : CKOOL_h.inc CKOOL.rpgle
+CKOOL.tgm : CKOOL.srvpgm ARCHIAPI.bnddir 
+CKLOGMSG.pgm : CKLOGMSG.sqlrpgle
+CKLOGMSG.tgm : CKOOL.srvpgm CKLOGMSG.pgm
+CKLOGMSG.cmd : CKLOGMSG.tgm
+CKLONGMSG.pgm : CKLONGMSG.sqlrpgle
+CKLONGMSG.tgm : CKOOL.srvpgm CKLONGMSG.pgm
+CKLONGMSG.cmd : CKLONGMSG.tgm
+CKERROR.pgm : CKERROR.sqlrpgle
+CKERROR.tgm : CKOOL.srvpgm CKERROR.pgm
+CKERROR.cmd : CKERROR.tgm
+ARCHIAPI.bnddir : CKOOL.entry
