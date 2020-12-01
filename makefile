@@ -61,6 +61,7 @@ include makefile_components
 	system "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1208)" 
 	#system "CPYFRMSTMF FROMSTMF('$<') TOMBR('/QSYS.lib/$(SRC_LIB).lib/QSRVSRC.file/$*.mbr') MBROPT(*replace) STMFCCSID(*STMF) DBFCCSID(*FILE) STMFCODPAG(1208)"
 	#system "CRTSRVPGM SRVPGM($(BIN_LIB)/$*) MODULE($(patsubst %,$(WRK_LIB)/%,$(basename $^))) OPTION(*DUPPROC) SRCFILE($(SRC_LIB)/QSRVSRC)"
+	liblist -af $(LIBLIST);\
 	system "CRTSRVPGM SRVPGM($(BIN_LIB)/$*) MODULE($(modules)) OPTION(*DUPPROC) SRCSTMF('$<')"
 
 	@touch $@

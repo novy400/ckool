@@ -79,7 +79,7 @@ dcl-proc CKOOL_throw export;
   end-pi;
 
   // The message reference key.
-  message_sendEscapeMessage(message);
+  message_sendEscapeMessage(message:0);
 
 end-proc;
 dcl-proc CKOOL_catch export;
@@ -88,7 +88,7 @@ dcl-proc CKOOL_catch export;
 
   dcl-ds message likeds(message_t);
   clear message;
-  message = message_receiveMessage('*ANY' : 0 );
+  message = message_receiveMessage('*ANY' : 1 );
    return message.text;
 end-proc;
 

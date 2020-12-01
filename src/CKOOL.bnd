@@ -1,4 +1,10 @@
-            STRPGMEXP  PGMLVL(*CURRENT) SIGNATURE('CKOOL_0.0.2')
+            STRPGMEXP  PGMLVL(*CURRENT) SIGNATURE('CKOOL_0.0.3')
+               EXPORT     SYMBOL('CKOOL_writeJobLog')
+               EXPORT     SYMBOL('CKOOL_displayLongMessage')
+               EXPORT     SYMBOL('CKOOL_throw')
+               EXPORT     SYMBOL('CKOOL_catch')
+            ENDPGMEXP   
+            STRPGMEXP  PGMLVL(*PRV) SIGNATURE('CKOOL_0.0.2')
                EXPORT     SYMBOL('CKOOL_writeJobLog')
                EXPORT     SYMBOL('CKOOL_displayLongMessage')
             ENDPGMEXP   
