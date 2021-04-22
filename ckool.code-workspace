@@ -4,8 +4,8 @@
 			"path": "."
 		},
 		{
-			"name": "SSH FS - pub400_ckool",
-			"uri": "ssh://pub400_ckool/"
+			"name": "SSH FS - as400",
+			"uri": "ssh://as400/YV/mesProjets/ckool"
 		}
 	],
 	"settings": {}
