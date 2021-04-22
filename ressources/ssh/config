@@ -1,5 +1,5 @@
-Host pub400
-    HostName pub400.com
-    Port 2222
-    User novy400
+Host as400
+    HostName as400
+    Port 22
+    User YV
 
